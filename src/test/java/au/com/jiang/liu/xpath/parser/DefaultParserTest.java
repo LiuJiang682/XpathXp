@@ -63,7 +63,7 @@ public class DefaultParserTest {
 	@Test
 	public void shouldReturnTitleNodeWithNS() {
 		//Given the test instance
-		DefaultParser parser = new DefaultParser(new File("src/test/resources/dataNS.xml"));
+		DefaultParser parser = new DefaultParser(new File("src/test/resources/dataNSMockUrl.xml"));
 		//When the getNodeListByTitle method called
 		NodeList nodeList = parser.getAllTutorialsWithNSByTitle("XML");
 		//Then node list should return

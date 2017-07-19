@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- <tutorials xmlns="http://www.baeldung.com/full_archive"> -->
-<tutorials xmlns="http://www.fpml.org/FpML-5/confirmation"> 
+<tutorials xmlns="http://localhost:8080"> 
     <tutorial tutId="01" type="java">
         <title>Guava</title>
         <description>Introduction to Guava</description>

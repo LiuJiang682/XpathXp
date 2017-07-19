@@ -190,16 +190,17 @@ public class DefaultParser {
                 @Override
                 public String getNamespaceURI(String arg0) {
                     if ("bdn".equals(arg0)) {
+                    	return "http://localhost:8080";
 //                        return "http://www.baeldung.com/full_archive";
-                    	return "http://www.fpml.org/FpML-5/confirmation";
+//                    	return "http://www.fpml.org/FpML-5/confirmation";
                     }
                     return null;
                 }
             });
 
 //            String expression = "/bdn:tutorials/bdn:tutorial";
-            String expression = "//bdn:Tutorial[descendant::title[text()=" + "'" + title + "'" + "]]";
-//            String expression = "/bdn:tutorials/bdn:tutorial/bdn:title[text()=" + "'" + title + "'" + "]";
+//            String expression = "//bdn:Tutorial[descendant::title[text()=" + "'" + title + "'" + "]]";
+            String expression = "/bdn:tutorials/bdn:tutorial/bdn:title[text()=" + "'" + title + "'" + "]";
 //            String expression = "//bdn:tutorial/bdn:title[text()=" + "'" + title + "'" + "]";
             
             nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);

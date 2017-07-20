@@ -338,6 +338,72 @@ public class DefaultParser {
 		return node;
 	}
 
+	public NodeList getAllObjectTypes()
+			throws SAXException, IOException, ParserConfigurationException {
+		NodeList nodeList = null;
+
+		try {
+
+			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+			builderFactory.setNamespaceAware(true);
+			DocumentBuilder builder = builderFactory.newDocumentBuilder();
+
+			Document xmlDocument = builder.parse(this.getFile());
+
+			XPath xPath = XPathFactory.newInstance().newXPath();
+
+			nodeList = (NodeList) xPath.compile("//OBJECT_TYPE/following-sibling::prop[1]/*")
+					.evaluate(xmlDocument, XPathConstants.NODESET);
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+
+		return nodeList;
+	}
+	
+	public NodeList getAllDataSuffixObjectTypes()
+			throws SAXException, IOException, ParserConfigurationException {
+		NodeList nodeList = null;
+
+		try {
+
+			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+			builderFactory.setNamespaceAware(true);
+			DocumentBuilder builder = builderFactory.newDocumentBuilder();
+
+			Document xmlDocument = builder.parse(this.getFile());
+
+			XPath xPath = XPathFactory.newInstance().newXPath();
+
+//			nodeList = (NodeList) xPath.compile("//OBJECT_TYPE[text() = 'Data']/following-sibling::param[1]/*")
+//					.evaluate(xmlDocument, XPathConstants.NODESET);
+			
+			nodeList = (NodeList) xPath.compile("//OBJECT_TYPE[contains(text(), \"Data\")]/following-sibling::param[1]/*")
+					.evaluate(xmlDocument, XPathConstants.NODESET);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+
+		return nodeList;
+	}
+
 	public NodeList filterEmptyNodes(Node node) throws Exception {
 
 		XPathFactory xpathFactory = XPathFactory.newInstance();
@@ -349,7 +415,7 @@ public class DefaultParser {
 			Node emptyTextNode = emptyTextNodes.item(i);
 			emptyTextNode.getParentNode().removeChild(emptyTextNode);
 		}
-		
+
 		return node.getChildNodes();
 	}
 }

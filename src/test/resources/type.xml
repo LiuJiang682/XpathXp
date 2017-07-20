@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<type>
+  <OBJECT_TYPE>SiteData</OBJECT_TYPE> 
+  <prop>
+    <DESCRIPTION>Site parameters</DESCRIPTION> 
+    <PARENT>NULL</PARENT> 
+    <VIRTUAL>0</VIRTUAL> 
+    <VISIBLE>1</VISIBLE> 
+    <PICTURE>NULL</PICTURE> 
+    <HELP>10008</HELP> 
+    <MIN_NO>1</MIN_NO> 
+    <MAX_NO>1</MAX_NO> 
+    <NAME_FORMAT>NULL</NAME_FORMAT> 
+  </prop>
+  <param>
+    <PARAMETER>blabla</PARAMETER> 
+    <DATA_TYPE>INTEGER</DATA_TYPE> 
+    <DESCRIPTION>blaba</DESCRIPTION> 
+    <MIN_NO>1</MIN_NO> 
+    <MAX_NO>1</MAX_NO> 
+    <ORDER1>1</ORDER1> 
+    <NESTED>0</NESTED> 
+    <DEFAULT1>NULL</DEFAULT1> 
+    <FORMAT>0:16382</FORMAT> 
+  </param>
+  <OBJECT_TYPE>Data</OBJECT_TYPE> 
+  <prop>
+    <DESCRIPTION>Site parameters</DESCRIPTION> 
+    <PARENT>NULL</PARENT> 
+    <VIRTUAL>0</VIRTUAL> 
+    <VISIBLE>1</VISIBLE> 
+    <PICTURE>NULL</PICTURE> 
+    <HELP>10008</HELP> 
+    <MIN_NO>1</MIN_NO> 
+    <MAX_NO>1</MAX_NO> 
+    <NAME_FORMAT>NULL</NAME_FORMAT> 
+  </prop>
+  <param>
+    <PARAMETER>gmgm</PARAMETER> 
+    <DATA_TYPE>INTEGER</DATA_TYPE> 
+    <DESCRIPTION>babla</DESCRIPTION> 
+    <MIN_NO>1</MIN_NO> 
+    <MAX_NO>1</MAX_NO> 
+    <ORDER1>1</ORDER1> 
+    <NESTED>0</NESTED> 
+    <DEFAULT1>NULL</DEFAULT1> 
+    <FORMAT>0:16382</FORMAT> 
+  </param>
+</type>

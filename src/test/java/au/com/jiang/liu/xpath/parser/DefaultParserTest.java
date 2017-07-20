@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -13,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class DefaultParserTest {
 
@@ -83,6 +87,33 @@ public class DefaultParserTest {
 		assertThat(nodeList.getLength(), is(2));
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			LOGGER.debug(nodeList.item(i).getTextContent());
+		}
+	}
+	
+	@Test
+	public void shouldReturnTypes() throws Exception {
+		//Given the test instance
+		DefaultParser parser = new DefaultParser(new File("src/test/resources/type.xml"));
+		//When the getNodeListByTitle method called
+		Node node = parser.ParserForObjectTypes("Data");
+		//Then node list should return
+		assertNotNull(node);
+		LOGGER.debug(node);
+		NodeList children = node.getChildNodes();
+		LOGGER.debug("Contains: " + children.getLength());
+		for (int i = 0; i < children.getLength(); i++) {
+			Node child = children.item(i);
+			if (Node.ELEMENT_NODE == child.getNodeType()) {
+				LOGGER.debug(child.getNodeName() + "=" + child.getTextContent());
+			}
+		}
+		
+		NodeList elements = parser.filterEmptyNodes(node);
+		assertNotNull(elements);
+		LOGGER.debug("elements contains: " + elements.getLength());
+		for (int j = 0; j < elements.getLength(); j++) {
+			Node e = elements.item(j);
+			LOGGER.debug(e.getNodeName() + "=" + e.getTextContent());
 		}
 	}
 }

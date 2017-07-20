@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class DefaultParserTest {
@@ -69,5 +70,19 @@ public class DefaultParserTest {
 		//Then node list should return
 		assertNotNull(nodeList);
 		assertThat(nodeList.getLength(), is(1));
+	}
+	
+	@Test
+	public void shouldReturnPaths() {
+		//Given the test instance
+		DefaultParser parser = new DefaultParser(new File("src/test/resources/dataMulti-NS.xml"));
+		//When the getNodeListByTitle method called
+		NodeList nodeList = parser.getAllPaths();
+		//Then node list should return
+		assertNotNull(nodeList);
+		assertThat(nodeList.getLength(), is(2));
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			LOGGER.debug(nodeList.item(i).getTextContent());
+		}
 	}
 }

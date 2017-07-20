@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- <tutorials xmlns="http://www.baeldung.com/full_archive"> -->
+<tutorials xmlns="http://www.fpml.org/FpML-5/confirmation" xmlns:lh="http://localhost:8080"> 
+    <tutorial tutId="01" type="java">
+        <title>Guava</title>
+        <description>Introduction to Guava</description>
+        <date>04/04/2016</date>
+        <author>GuavaAuthor</author>
+        <lh:path>GuavaAuthor</lh:path>
+    </tutorial>
+    <tutorial tutId="02" type="java">
+        <title>XML</title>
+        <description>Introduction to XPath</description>
+        <date>04/05/2016</date>
+        <author>XMLAuthor</author>
+        <lh:path>XMLAuthor</lh:path>
+    </tutorial>
+</tutorials>

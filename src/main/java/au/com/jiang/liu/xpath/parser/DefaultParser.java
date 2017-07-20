@@ -211,6 +211,49 @@ public class DefaultParser {
         return nodeList;
     }
     
+    public NodeList getAllPaths() {
+        NodeList nodeList = null;
+        try {
+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+            builderFactory.setNamespaceAware(true);
+            DocumentBuilder builder = builderFactory.newDocumentBuilder();
+
+            Document xmlDocument = builder.parse(this.getFile());
+
+            this.clean(xmlDocument);
+
+            XPath xPath = XPathFactory.newInstance().newXPath();
+
+            xPath.setNamespaceContext(new NamespaceContext() {
+
+                @Override
+                public Iterator getPrefixes(String arg0) {
+                    return null;
+                }
+
+                @Override
+                public String getPrefix(String arg0) {
+                    return null;
+                }
+
+                @Override
+                public String getNamespaceURI(String arg0) {
+                    if ("lp".equals(arg0)) {
+                    	return "http://localhost:8080";
+                    }
+                    return null;
+                }
+            });
+
+            String expression = "//lp:path";
+            nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
+
+        } catch (SAXException | IOException | ParserConfigurationException | XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return nodeList;
+    }
+    
     private void clean(Node node) {
 
         NodeList childs = node.getChildNodes();

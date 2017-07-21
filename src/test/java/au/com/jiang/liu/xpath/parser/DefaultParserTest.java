@@ -116,6 +116,33 @@ public class DefaultParserTest {
 			LOGGER.debug(e.getNodeName() + "=" + e.getTextContent());
 		}
 	}
+	
+	@Test
+	public void shouldReturnTypesUsingVariableResolver() throws Exception {
+		// Given the test instance
+		DefaultParser parser = new DefaultParser(new File("src/test/resources/type.xml"));
+		// When the getNodeListByTitle method called
+		Node node = parser.ParserForObjectTypesWithVariableResolver("Data");
+		// Then node list should return
+		assertNotNull(node);
+		LOGGER.debug("Resolver: " + node);
+		NodeList children = node.getChildNodes();
+		LOGGER.debug("Resolver Contains: " + children.getLength());
+		for (int i = 0; i < children.getLength(); i++) {
+			Node child = children.item(i);
+			if (Node.ELEMENT_NODE == child.getNodeType()) {
+				LOGGER.debug(child.getNodeName() + "=" + child.getTextContent());
+			}
+		}
+
+		NodeList elements = parser.filterEmptyNodes(node);
+		assertNotNull(elements);
+		LOGGER.debug("elements contains: " + elements.getLength());
+		for (int j = 0; j < elements.getLength(); j++) {
+			Node e = elements.item(j);
+			LOGGER.debug(e.getNodeName() + "=" + e.getTextContent());
+		}
+	}
 
 	@Test
 	public void shouldReturnAllObjectType() throws SAXException, IOException, ParserConfigurationException {

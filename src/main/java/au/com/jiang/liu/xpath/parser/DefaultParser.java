@@ -337,6 +337,50 @@ public class DefaultParser {
 
 		return node;
 	}
+	
+	public Node ParserForObjectTypesWithVariableResolver(final String dataType)
+			throws SAXException, IOException, ParserConfigurationException {
+		Node node = null;
+
+		try {
+
+			DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+			builderFactory.setNamespaceAware(true);
+			DocumentBuilder builder = builderFactory.newDocumentBuilder();
+
+			Document xmlDocument = builder.parse(this.getFile());
+
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			SimpleVariableResolver resolver = new SimpleVariableResolver();
+			resolver.addVariable(new QName("type"), dataType);
+			xPath.setXPathVariableResolver(resolver);
+			
+			XPathExpression expr = xPath.compile("/type/OBJECT_TYPE[. = $type]/following-sibling::prop[1]");
+			
+			node = (Node) expr.evaluate(xmlDocument, XPathConstants.NODE);
+			// NodeList nodeList = (NodeList) xPath
+			// .compile("//OBJECT_TYPE[text() = *]/following-sibling::prop[1]/*")
+			// .evaluate(xmlDocument, XPathConstants.NODESET);
+			//
+			// for (int i = 0; i < nodeList.getLength(); i++) {
+			// System.out.println(nodeList.item(i).getNodeName() + " = " +
+			// nodeList.item(i).getTextContent());
+			// }
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+
+		return node;
+	}
 
 	public NodeList getAllObjectTypes()
 			throws SAXException, IOException, ParserConfigurationException {

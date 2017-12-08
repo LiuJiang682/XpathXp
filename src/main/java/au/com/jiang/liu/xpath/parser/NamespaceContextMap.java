@@ -10,8 +10,6 @@ import java.util.Set;
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
 
-import org.w3c.dom.NameList;
-
 public class NamespaceContextMap implements NamespaceContext {
 	 private final Map<String, String> prefixMap;
 	  private final Map<String, Set<String>> nsMap;

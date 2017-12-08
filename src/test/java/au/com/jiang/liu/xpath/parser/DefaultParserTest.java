@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -116,7 +117,7 @@ public class DefaultParserTest {
 			LOGGER.debug(e.getNodeName() + "=" + e.getTextContent());
 		}
 	}
-	
+
 	@Test
 	public void shouldReturnTypesUsingVariableResolver() throws Exception {
 		// Given the test instance
@@ -155,7 +156,7 @@ public class DefaultParserTest {
 			LOGGER.debug("Object Type: " + nodeList.item(i).getNodeName() + " = " + nodeList.item(i).getTextContent());
 		}
 	}
-	
+
 	@Test
 	public void shouldReturnAllDataSuffixObjectType() throws SAXException, IOException, ParserConfigurationException {
 		// Given the test instance
@@ -164,7 +165,19 @@ public class DefaultParserTest {
 		NodeList nodeList = parser.getAllDataSuffixObjectTypes();
 		assertNotNull(nodeList);
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			LOGGER.debug("Data suffix Object Type: " + nodeList.item(i).getNodeName() + " = " + nodeList.item(i).getTextContent());
+			LOGGER.debug("Data suffix Object Type: " + nodeList.item(i).getNodeName() + " = "
+					+ nodeList.item(i).getTextContent());
 		}
+	}
+
+	@Test
+	public void shouldReturnIdInMultiNS() throws Exception {
+		// Given the test instance
+		DefaultParser parser = new DefaultParser(new File("src/test/resources/Multi-NS.xml"));
+		// When the getMultiNSId method called
+		String id = parser.getMultiNSId();
+		//That the id should return
+		assertNotNull(id);
+		assertThat(id, is("testpoc"));
 	}
 }

@@ -462,4 +462,50 @@ public class DefaultParser {
 
 		return node.getChildNodes();
 	}
+
+	public String getMultiNSId() throws Exception {
+		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+		builderFactory.setNamespaceAware(true);
+		DocumentBuilder builder = builderFactory.newDocumentBuilder();
+
+		Document xmlDocument = builder.parse(this.getFile());
+		
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		// XPath to find empty text nodes.
+		XPath xPath = xpathFactory.newXPath();
+//		NamespaceContext context = new NamespaceContextMap(
+//		        "am", "http://localhost:8080/a", 
+//		        "s", "http://localhost:8080/s");
+//		xPath.setNamespaceContext(context);
+//		XPathExpression xpathExp = xPath.compile("/am:entry/am:content/s:series-poc/s:c_series.c_id/text()");
+//		return (String) xpathExp.evaluate(xmlDocument, XPathConstants.STRING);
+		xPath.setNamespaceContext(new NamespaceContext() {
+
+			@Override
+			public Iterator getPrefixes(String arg0) {
+				return null;
+			}
+
+			@Override
+			public String getPrefix(String arg0) {
+				return null;
+			}
+
+			@Override
+			public String getNamespaceURI(String arg0) {
+				if ("am".equals(arg0)) {
+					return "http://localhost:8080/a";
+				}
+				else if ("s".equals(arg0)) {
+					return "http://localhost:8080/s";
+				}
+				return null;
+			}
+		});
+
+		String expression = "/am:entry/am:content/s:series-poc";
+		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
+		System.err.println("NodeList Length: " + nodeList.getLength());
+		return "abc";
+	}
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<am:entry xmlns:am="http://localhost:8080/a" xmlns:s="http://localhost:808/s">
+	<am:content type="application/xml">
+		<s:series-poc>
+			<s:c_series.c_id>testpoc</s:c_series.c_id>
+		</s:series-poc>
+	</am:content>
+</am:entry>
